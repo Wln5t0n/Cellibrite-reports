@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
+    <title>Locations</title>
+    <style type="text/css">
+        html
+        {
+            height: 100%;
+        }
+        body
+        {
+            height: 100%;
+            margin: 0px;
+            padding: 0px;
+        }
+        
+        
+        #map_canvas
+        {
+            height: 100%;
+            width: 100%;
+        }
+        
+        #locations-overlay
+        {
+            position: absolute;
+            top: 30px;
+            right: 10px;
+            background: RGBA(0,0,0,0.7);
+            z-index: 1000;
+            -moz-border-radius: 5px;
+            width: 255px;
+        }
+        
+        H2
+        {
+            margin: 2px;
+            font-family: Calibri;
+            color: White;
+            font-size: 15px;
+        }
+        
+        UL
+        {
+            margin: 0;
+            padding: 0;
+            list-style: none;
+            max-height: 500px;
+            overflow-x: hidden;
+            overflow-y: scroll;
+        }
+        
+        LI A
+        {
+            color: White;
+            text-decoration: none;
+            display: block;
+            padding: 5px 10px;
+            border-bottom: 1px solid #fff;
+            background: #0c0c0c url(location_pin.png) no-repeat 7px 5px;
+            padding-left: 28px;
+            font-size: 12px;
+            cursor: pointer;
+        }
+        
+        
+        LI A:hover, LI A.active
+        {
+            background-color: #6386b1;
+        }
+        
+        SPAN.small
+        {
+            font-size: 10px;
+            color: Silver;
+            line-height: 12px;
+        }
+        
+        #header
+        {
+            border-bottom: 1px solid #fff;
+            padding: 4px 5px;
+            background: url(map.png) no-repeat 8px 8px;
+            padding-left: 27px;
+        }
+        
+        #toggle-locations
+        {
+            float: right;
+            margin: 4px 2px;
+            cursor: pointer;
+            width: 16px;
+            height: 16px;
+            display: block;
+            background: url(minus.png) no-repeat center center;
+        }
+        
+        a.plus
+        {
+            background: url(plus.png) no-repeat center center !important;
+        }
+        
+        
+        DIV.loc H2
+        {
+            color: #2c2c2c;
+            font-size: 16px;
+            font-weight: bold;
+            padding-left: 20px;
+            background: url(map.png) no-repeat left center;
+        }
+        
+        DIV.loc SPAN.small
+        {
+            color: #2c2c2c;
+            font-size: 11px;
+        }
+        
+        DIV.loc
+        {
+            font-size: 12px;
+        }
+    </style>
+    <script type="text/javascript" src="jquery-min.js">
+    </script>
+    <script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=true">
+    </script>
+    <script type="text/javascript">
+
+
+        $(document).ready(function () {
+            var myOptions = {
+                zoom: 3,
+                center: new google.maps.LatLng(0, 0),
+                mapTypeId: google.maps.MapTypeId.HYBRID
+            };
+
+            window.map = new google.maps.Map(document.getElementById("map_canvas"), myOptions);
+            window.infoWindow = new google.maps.InfoWindow();
+            $('#toggle-locations').click(function (e) {
+                e.preventDefault();
+                var el = $("#toggle-locations");
+                var collapsed = el.data("collapsed");
+                if (collapsed) {
+                    el.removeData("collapsed");
+                    el.removeClass("plus");
+                    $("#location-list").show();
+                } else {
+                    el.addClass("plus");
+                    el.data("collapsed", true);
+                    $("#location-list").hide();
+                };
+            });
+
+
+
+
+            $('#location-list a').live('click', function (e) {
+                e.preventDefault();
+                var id = Number($(e.currentTarget).attr('rel'));
+                showInfo(id);
+            });
+
+            addCoordinate(23.153559,72.88683, '/storage/emulated/0/Android/media/com.whatsapp/WhatsApp/Media/WhatsApp Documents/PXL_20230522_132217374.jpg', '');
+addCoordinate(23.153511,72.88675, '/storage/emulated/0/Android/media/com.whatsapp/WhatsApp/Media/WhatsApp Documents/IMG_20230419_200354.jpg', '');
+addCoordinate(23.192526,72.61643, '/storage/emulated/0/Android/media/com.whatsapp/WhatsApp/Media/WhatsApp Documents/IMG_4416.heic', '');
+addCoordinate(23.192533,72.61643, '/storage/emulated/0/Android/media/com.whatsapp/WhatsApp/Media/WhatsApp Documents/IMG_4414.heic', '');
+        });
+
+
+
+
+        function showInfo(id) {
+            var loc = locations[id];
+            var infoWnd = window.infoWindow;
+            window.map.panTo(loc.position);
+            window.map.setZoom(8);
+
+            var html = '<div class="loc"><h2>' + loc.title + ' <span class="small">(' + loc.lat + ',' + loc.lng + ')</span></h2>' + (loc.extra ? loc.extra : "") + "</div>";
+            infoWnd.setContent(html);
+            infoWnd.open(window.map, loc.marker);
+        }
+
+        var locations = {};
+        var id = 0;
+        function addCoordinate(lat, lng, description, extra) {
+            var latlng = new google.maps.LatLng(lat, lng);
+
+            var marker = new google.maps.Marker({
+                position: latlng,
+                map: window.map,
+                title: description,
+                id: id
+            });
+
+            locations[id] = {
+                position: latlng,
+                marker: marker,
+                extra: extra,
+                title: description,
+                lat: lat,
+                lng: lng
+            };
+
+            google.maps.event.addListener(marker, 'click', function () {
+                showInfo(marker.id);
+            });
+
+
+            var html = '<li><a rel="' + id + '">' + description + ' <span class="small">(' + lat + ',' + lng + ')</span></a></li>';
+            $('#location-list').append(html);
+            $('#total').text(++id);
+        }
+    </script>
+</head>
+<body>
+    <div id="locations-overlay">
+        <div id="header">
+            <a href="" id="toggle-locations" class=""></a>
+            <h2>
+                Locations (<span id="total">0</span>)</h2>
+        </div>
+        <ul id="location-list">
+        </ul>
+        <div id="cellebrite">
+            <br />
+        </div>
+    </div>
+    <div id="map_canvas" style="width: 100%; height: 100%">
+    </div>
+</body>
+</html>

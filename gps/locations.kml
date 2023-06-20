@@ -1,0 +1,49 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<kml xmlns:gx="http://www.google.com/kml/ext/2.2" xmlns="http://www.opengis.net/kml/2.2">
+  <Document>
+    <Placemark>
+      <name>/storage/emulated/0/Android/media/com.whatsapp/WhatsApp/Media/WhatsApp Documents/PXL_20230522_132217374.jpg</name>
+      <description><![CDATA[<p>5/22/2023 7:51:29 AM(UTC+0)</p>]]></description>
+      <TimeStamp>
+        <when>2023-05-22T07:51:29Z</when>
+      </TimeStamp>
+      <Point>
+        <altitudeMode>clampedToGround</altitudeMode>
+        <coordinates>72.88683,23.153559</coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
+      <name>/storage/emulated/0/Android/media/com.whatsapp/WhatsApp/Media/WhatsApp Documents/IMG_20230419_200354.jpg</name>
+      <description><![CDATA[<p>4/19/2023 9:03:34 AM(UTC+0)</p>]]></description>
+      <TimeStamp>
+        <when>2023-04-19T09:03:34Z</when>
+      </TimeStamp>
+      <Point>
+        <altitudeMode>clampedToGround</altitudeMode>
+        <coordinates>72.88675,23.153511</coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
+      <name>/storage/emulated/0/Android/media/com.whatsapp/WhatsApp/Media/WhatsApp Documents/IMG_4416.heic</name>
+      <description><![CDATA[<p>2/28/2023 12:37:08 PM(UTC+0)</p>]]></description>
+      <TimeStamp>
+        <when>2023-02-28T12:37:08Z</when>
+      </TimeStamp>
+      <Point>
+        <altitudeMode>clampedToGround</altitudeMode>
+        <coordinates>72.61643,23.192526</coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
+      <name>/storage/emulated/0/Android/media/com.whatsapp/WhatsApp/Media/WhatsApp Documents/IMG_4414.heic</name>
+      <description><![CDATA[<p>2/28/2023 12:37:02 PM(UTC+0)</p>]]></description>
+      <TimeStamp>
+        <when>2023-02-28T12:37:02Z</when>
+      </TimeStamp>
+      <Point>
+        <altitudeMode>clampedToGround</altitudeMode>
+        <coordinates>72.61643,23.192533</coordinates>
+      </Point>
+    </Placemark>
+  </Document>
+</kml>
